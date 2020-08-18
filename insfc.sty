@@ -7,22 +7,39 @@
 % Thank Prof. Mingming Chen for his pioneer work. 
 % http://bbs.ctex.org/forum.php?mod=viewthread&tid=153098&extra=page%3D1
 % -------------------------------------------------
+\RequirePackage[a4paper, left = 3.2cm, right = 3.2cm, top = 2.54cm, bottom = 2.54cm]{geometry}
+\RequirePackage{xcolor}
+\RequirePackage[subrefformat=parens,labelformat=parens]{subfig} %
+\RequirePackage{booktabs} % for \toprule \midrule \bottomrule \cmidrule
+\RequirePackage{enumitem}
+\RequirePackage{fontspec}
+\RequirePackage{setspace} 
+\RequirePackage{caption}
+\RequirePackage[square,numbers,sort&compress]{natbib}   % For Reference
+\RequirePackage{titlesec}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{cleveref}
+\RequirePackage{graphicx}
+% "Times New Roman" and "STKaitiSC-Regular" are PostScript Name in MacOS's "Font Book.app"
+\setmainfont{Times New Roman}
+\setCJKmainfont{STKaitiSC-Regular}
 
-
-
-
-
-
-% Cite mark [1] on the top right
-% \newcommand{\citetop}[1]{\textsuperscript{\cite{#1}}}
-
-% enumitem command
-
-
-% \setlength{\parskip}{0.5\baselineskip}
-
-% xcolor command
+\setlist[enumerate]{itemsep = 0pt, parsep = 0pt, topsep = 2bp}
+\setlist[itemize]{itemsep = 0pt, parsep = 0pt, topsep = 2bp}
 \definecolor{NsfcBlue}{RGB}{0, 112, 192}
+\DeclareCaptionFont{capfont}{\kaishu\zihao{-4}\selectfont} % Caption font
+\DeclareCaptionFont{subfont}{\kaishu\zihao{5}\selectfont} % Sub-caption font
+\captionsetup{font = capfont}
+\captionsetup[subfigure]{font = subfont}
+\captionsetup[figure]{labelsep=space} % 空格 space；点 period；冒号 colon
+\captionsetup[table]{labelsep=space}  % 空格 space；点 period；冒号 colon
+\newcommand{\citess}[1]{\textsuperscript{\cite{#1}}}
+\crefformat{table}{表~#2#1#3}
+\crefformat{figure}{图~#2#1#3}
+\crefformat{equation}{式~（#2#1#3）}
+\setlength{\bibsep}{1pt plus 0.3ex}
+\titleformat{\subsubsection}[block]{\hspace{3em}}{\thesubsubsection}{1em}{}
+\graphicspath{{images/}}   % 设置图片所存放的目录
 
 % setspace command
 % \setstretch{1.5} % 22 bp / 14 pt = 1.571
@@ -35,12 +52,8 @@
 \newcommand{\NsfcChapter}[2]{   
   \begingroup
     \setcounter{section}{0}  
-    % \setlength{\parskip}{0.5\baselineskip}
-    % For xelatex
     \setlength{\baselineskip}{22bp}
-    \indent {\bfseries \NsfcNote{#1}}\NsfcNote{\setmainfont{KaiTi}#2} \vspace{9bp}%
-    % For pdflatex
-    % \indent {\bfseries \NsfcNote{#1}}\NsfcNote{#2} %
+    \indent {\bfseries \NsfcNote{#1}}\NsfcNote{\setmainfont{STKaiti}#2} \vspace{9bp}%
   \endgroup
 }
 
@@ -48,10 +61,7 @@
 \newcommand{\NsfcSection}[3]{   
   \setcounter{section}{#1}
   \setcounter{subsection}{0}
-  % For xelatex
-  \indent \NsfcNote{\setmainfont{KaiTi} #1．}{\bfseries\NsfcNote{#2}}\NsfcNote{#3}%
-  % For pdflatex
-  % \indent \NsfcNote{#1．}{\bfseries\NsfcNote{#2}}\NsfcNote{#3} %
+  \indent \NsfcNote{\setmainfont{Times New Roman Bold} #1．}{\bfseries\NsfcNote{#2}}\NsfcNote{#3}%
 }
 
 % \renewcommand{\maketitle}{
@@ -75,4 +85,3 @@
 \def\cvprssubsect#1{\cvprsubsection*{#1}}
 \def\cvprsubsect#1{\cvprsubsection{\hskip -1em.~#1 \vspace{-0.2em}}}
 \def\subsection{\@ifstar\cvprssubsect\cvprsubsect}
-
